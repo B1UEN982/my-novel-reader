@@ -1,3 +1,4 @@
+/* 通用样式 */
 body {
   font-family: "微软雅黑", sans-serif;
   padding: 2em;
@@ -5,8 +6,10 @@ body {
   color: #000;
   transition: background 0.3s, color 0.3s;
 }
+
 .center-container {
   width: 1000px;
+  max-width: 95vw; /* 最大宽度不超过屏幕95% */
   margin: 0 auto;
   text-align: left;
 }
@@ -14,25 +17,30 @@ body {
 #toggleTheme {
   margin-bottom: 1em;
 }
+
 #header {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 1em;
 }
+
 #header img {
   width: 100px;
   height: auto;
   border-radius: 6px;
 }
+
 .author {
   margin-left: 1.5em;
   font-weight: bold;
 }
+
 .intro {
   margin-left: 1.8em;
   color: #666;
 }
+
 #content {
   white-space: pre-wrap;
   background: #fff;
@@ -41,14 +49,17 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: background 0.3s, color 0.3s;
 
-  width: 1000px; /* 固定宽度，可根据需求调整 */
-  margin: 0 auto; /* 上下边距0，左右自动，让元素居中 */
+  width: 1000px;
+  max-width: 95vw;
+  margin: 0 auto;
 }
+
 select {
   font-size: 1em;
   margin-bottom: 1em;
 }
 
+/* 夜间模式 */
 body.dark {
   background: #1e1e1e;
   color: #eee;
@@ -60,6 +71,8 @@ body.dark #content {
   color: #eee;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
+
+/* 返回顶部按钮 */
 #backToTop {
   position: fixed;
   left: 20px;
@@ -77,6 +90,32 @@ body.dark #content {
   z-index: 1000;
   display: none;
 }
+
 #backToTop:hover {
   opacity: 1;
+}
+
+/* 手机响应式 */
+@media (max-width: 600px) {
+  body {
+    padding: 1em;
+  }
+  .center-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  #content {
+    width: 100%;
+    max-width: 100%;
+    padding: 1em;
+    font-size: 1.1rem;
+  }
+  select {
+    width: 100%;
+    font-size: 1rem;
+  }
+  #toggleTheme {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
 }
