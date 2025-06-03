@@ -3,31 +3,40 @@ const select = document.getElementById("chapterSelect");
 const themeBtn = document.getElementById("toggleTheme");
 const backToTopBtn = document.getElementById("backToTop");
 
-// 从服务器获取章节列表并生成选项
-fetch("/api/chapters")
-  .then((res) => res.json())
-  .then((chapters) => {
-    chapters.forEach((chapter) => {
-      const option = document.createElement("option");
-      option.value = chapter.file; // 用文件名
-      option.textContent = chapter.title;
-      select.appendChild(option);
+// 页面加载完后执行
+document.addEventListener("DOMContentLoaded", () => {
+  // 从 novel.json 读取章节列表
+  fetch("/novel.json")
+    .then((res) => res.json())
+    .then((data) => {
+      const chapters = data.chapters;
+      chapters.forEach((chapter) => {
+        const option = document.createElement("option");
+        option.value = chapter.id; // 用章节 id 作为 value
+        option.textContent = chapter.title;
+        select.appendChild(option);
+      });
+      if (chapters.length > 0) {
+        loadChapter(chapters[0].id); // 默认加载第一章
+      }
     });
-    if (chapters.length > 0) {
-      loadChapter(chapters[0].file);
-    }
-  });
+});
 
-// 读取并显示章节内容
-function loadChapter(file) {
-  fetch(`/chapters/${encodeURIComponent(file)}`) // 注意要encodeURIComponent编码中文和空格
-    .then((res) => res.text())
-    .then((text) => {
-      contentDiv.textContent = text;
+// 根据章节 id 加载对应内容
+function loadChapter(id) {
+  fetch("/novel.json")
+    .then((res) => res.json())
+    .then((data) => {
+      const chapter = data.chapters.find((ch) => ch.id == id);
+      if (chapter) {
+        contentDiv.textContent = chapter.content;
+      } else {
+        contentDiv.textContent = "章节未找到";
+      }
     });
 }
 
-// 切换章节时加载内容
+// 章节切换事件
 select.addEventListener("change", () => {
   loadChapter(select.value);
 });
