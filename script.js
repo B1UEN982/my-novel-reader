@@ -9,21 +9,21 @@ fetch("/api/chapters")
   .then((chapters) => {
     chapters.forEach((chapter) => {
       const option = document.createElement("option");
-      option.value = chapter.file;
+      option.value = chapter.id; // 改成用章节id
       option.textContent = chapter.title;
       select.appendChild(option);
     });
     if (chapters.length > 0) {
-      loadChapter(chapters[0].file);
+      loadChapter(chapters[0].id); // 用章节id加载
     }
   });
 
 // 读取并显示章节内容
-function loadChapter(file) {
-  fetch(`/chapters/${file}`)
-    .then((res) => res.text())
-    .then((text) => {
-      contentDiv.textContent = text;
+function loadChapter(id) {
+  fetch(`/api/chapter/${id}`) // 改成调用新的API接口，传章节id
+    .then((res) => res.json())
+    .then((chapter) => {
+      contentDiv.innerHTML = chapter.content.replace(/\n/g, "<br>"); // 处理换行显示
     });
 }
 
