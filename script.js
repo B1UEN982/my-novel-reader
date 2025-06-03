@@ -6,7 +6,7 @@ const backToTopBtn = document.getElementById("backToTop");
 // 页面加载完后执行
 document.addEventListener("DOMContentLoaded", () => {
   // 从 novel.json 读取章节列表
-  fetch("/novel.json")
+  fetch("novel.json")
     .then((res) => res.json())
     .then((data) => {
       const chapters = data.chapters;
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 根据章节 id 加载对应内容
 function loadChapter(id) {
-  fetch("/novel.json")
+  fetch("novel.json")
     .then((res) => res.json())
     .then((data) => {
       const chapter = data.chapters.find((ch) => ch.id == id);
