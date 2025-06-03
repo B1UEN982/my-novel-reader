@@ -72,24 +72,6 @@ body.dark #content {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
-/* 返回顶部按钮
-#backToTop {
-  position: fixed;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 10px 15px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  background: #555;
-  color: white;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.3s;
-  z-index: 1000;
-  display: none;
-} */
 #backToTop {
   position: fixed;
   left: 20px;
