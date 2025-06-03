@@ -7,30 +7,29 @@ const chaptersDir = path.join(__dirname, "chapters");
 
 app.use(express.static(__dirname)); // 让前端能访问 index.html 和 script.js
 
+// 返回章节列表（文件名和标题）
 app.get("/api/chapters", (req, res) => {
-  const novelPath = path.join(__dirname, "novel.json");
-  fs.readFile(novelPath, "utf-8", (err, data) => {
+  fs.readdir(chaptersDir, (err, files) => {
     if (err) {
-      return res.status(500).json({ error: "读取小说数据失败" });
+      return res.status(500).json({ error: "读取章节目录失败" });
     }
-    const novel = JSON.parse(data);
-    res.json(novel.chapters);
+    const chapters = files
+      .filter((f) => f.endsWith(".txt"))
+      .map((f) => ({
+        file: f,
+        title: f.replace(".txt", ""),
+      }));
+    res.json(chapters);
   });
 });
 
-app.get("/api/chapter/:id", (req, res) => {
-  const id = req.params.id;
-  const novelPath = path.join(__dirname, "novel.json");
-  fs.readFile(novelPath, "utf-8", (err, data) => {
-    if (err) {
-      return res.status(500).json({ error: "读取小说数据失败" });
-    }
-    const novel = JSON.parse(data);
-    const chapter = novel.chapters.find((c) => c.id === id);
-    if (!chapter) {
-      return res.status(404).json({ error: "章节未找到" });
-    }
-    res.json(chapter);
+// 返回指定章节内容
+app.get("/chapters/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(chaptersDir, filename);
+  fs.readFile(filePath, "utf-8", (err, data) => {
+    if (err) return res.status(404).send("文件不存在");
+    res.send(data);
   });
 });
 
