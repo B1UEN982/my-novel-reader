@@ -28,7 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
         select.appendChild(option);
       });
       if (chapters.length > 0) {
-        loadChapter(chapters[0].id); // 默认加载第一章
+        const lastId = localStorage.getItem("lastChapter");
+        const defaultId = chapters.some((ch) => ch.id == lastId)
+          ? lastId
+          : chapters[0].id;
+        loadChapter(defaultId);
+        select.value = defaultId;
       }
     })
     .catch((err) => {
@@ -52,9 +57,11 @@ function loadChapter(id) {
     });
 }
 
-// 章节切换事件
+// 章节切换事件（同时保存到本地）
 select.addEventListener("change", () => {
-  loadChapter(select.value);
+  const selectedId = select.value;
+  loadChapter(selectedId);
+  localStorage.setItem("lastChapter", selectedId);
 });
 
 // 🌙 切换日夜模式
