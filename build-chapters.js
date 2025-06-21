@@ -25,7 +25,7 @@ async function buildJson() {
       chapters.push({
         id: i + 1,
         title: getChapterTitle(filename),
-        content: Buffer.from(content.trim(), "utf-8").toString("base64"),
+        content: content.trim(),
       });
     }
 
