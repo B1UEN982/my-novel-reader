@@ -47,7 +47,7 @@ function loadChapter(id) {
     .then((data) => {
       const chapter = data.chapters.find((ch) => ch.id == id);
       if (chapter) {
-        contentDiv.textContent = chapter.content;
+        contentDiv.textContent = atob(chapter.content);
       } else {
         contentDiv.textContent = "章节未找到";
       }
