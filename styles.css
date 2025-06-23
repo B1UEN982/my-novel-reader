@@ -74,7 +74,8 @@ body.dark #content {
 
 #backToTop {
   position: fixed;
-  left: 20px;
+  /* left: 20px; */
+  right: 20px;
   bottom: 20px; /* 改成距离底部 */
   top: auto; /* 取消顶部定位 */
   transform: none; /* 取消平移 */
