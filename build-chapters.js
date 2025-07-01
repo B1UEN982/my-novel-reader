@@ -25,7 +25,7 @@ async function buildJson() {
       chapters.push({
         id: i + 1,
         title: getChapterTitle(filename),
-        content: content.trim(),
+        content: content, // ← 去掉 .trim()，保留原始格式
       });
     }
 
