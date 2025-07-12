@@ -18,6 +18,15 @@ function fetchNovelJson() {
 
 // 页面加载完后执行
 document.addEventListener("DOMContentLoaded", () => {
+  // 【插入点】主题初始化，先读localStorage并应用
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+    themeBtn.textContent = "🌞 切换到日间模式";
+  } else {
+    document.body.classList.remove("dark");
+    themeBtn.textContent = "🌙 切换到夜间模式";
+  }
   fetchNovelJson()
     .then((data) => {
       const chapters = data.chapters;
@@ -67,9 +76,13 @@ select.addEventListener("change", () => {
 // 🌙 切换日夜模式
 themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  themeBtn.textContent = document.body.classList.contains("dark")
-    ? "🌞 切换到日间模式"
-    : "🌙 切换到夜间模式";
+  if (document.body.classList.contains("dark")) {
+    themeBtn.textContent = "🌞 切换到日间模式";
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeBtn.textContent = "🌙 切换到夜间模式";
+    localStorage.setItem("theme", "light");
+  }
 });
 
 // 监听滚动，超过100px显示按钮，否则隐藏
