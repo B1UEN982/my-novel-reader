@@ -20,14 +20,14 @@ body {
 
 .text-info {
   border: 1px solid #ccc;
-  padding: 0.7em;
+  padding: 0.03em;
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   flex: 1; /* 右侧自适应扩展 */
 }
 
-.text-info h1 {
+/* .text-info h1 {
   margin: 0 0 0.5em;
 }
 
@@ -35,7 +35,7 @@ body {
   margin: 0 0 0.5em;
   font-weight: bold;
   color: #333;
-}
+} */
 
 .text-info .intro {
   color: #666;
@@ -50,7 +50,7 @@ body {
 }
 
 #header img {
-  width: 100px;
+  width: 120px;
   height: auto;
   border-radius: 6px;
 }
