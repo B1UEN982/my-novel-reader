@@ -103,6 +103,15 @@ body.dark #content {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
+body.dark .text-info {
+  background-color: #2e2e2e;
+  color: #eee;
+  border-color: #444;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.05);
+}
+body.dark .text-info .intro {
+  color: #ccc;
+}
 #backToTop {
   position: fixed;
   /* left: 20px; */
