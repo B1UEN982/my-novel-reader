@@ -18,6 +18,30 @@ body {
   margin-bottom: 1em;
 }
 
+.text-info {
+  border: 1px solid #ccc;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  flex: 1; /* 右侧自适应扩展 */
+}
+
+.text-info h1 {
+  margin: 0 0 0.5em;
+}
+
+.text-info .author {
+  margin: 0 0 0.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+.text-info .intro {
+  color: #666;
+  line-height: 1.6;
+}
+
 #header {
   display: flex;
   align-items: center;
@@ -26,7 +50,7 @@ body {
 }
 
 #header img {
-  width: 100px;
+  width: 145px;
   height: auto;
   border-radius: 6px;
 }
