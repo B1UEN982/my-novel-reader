@@ -20,7 +20,7 @@ body {
 
 .text-info {
   border: 1px solid #ccc;
-  padding: 1em;
+  padding: 0.7em;
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
@@ -39,7 +39,7 @@ body {
 
 .text-info .intro {
   color: #666;
-  line-height: 1.6;
+  line-height: 1;
 }
 
 #header {
@@ -50,7 +50,7 @@ body {
 }
 
 #header img {
-  width: 145px;
+  width: 100px;
   height: auto;
   border-radius: 6px;
 }
