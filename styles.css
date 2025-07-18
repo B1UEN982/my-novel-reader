@@ -19,12 +19,17 @@ body {
 }
 
 .text-info {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
   border: 1px solid #ccc;
-  padding: 0.03em;
+  padding: 1em;
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-  flex: 1; /* 右侧自适应扩展 */
+  flex: 1;
+
+  min-height: 120px; /* 关键：需有高度才能垂直居中 */
 }
 
 /* .text-info h1 {
@@ -40,6 +45,8 @@ body {
 .text-info .intro {
   color: #666;
   line-height: 1.5;
+  text-align: left; /* 根据需求也可以是 center */
+  margin: 0; /* 移除默认段落边距 */
 }
 
 #header {
