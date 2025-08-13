@@ -85,6 +85,12 @@ body {
   margin: 0 auto;
 }
 
+#content img {
+  max-width: 100%; /* 图片不会超过容器宽度 */
+  height: auto; /* 保持宽高比例 */
+  display: block;
+  margin: 1em 0; /* 上下留白 */
+}
 select {
   font-size: 1em;
   margin-bottom: 1em;

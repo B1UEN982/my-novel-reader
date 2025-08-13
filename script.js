@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
     .catch((err) => {
-      contentDiv.textContent = "加载章节列表失败：" + err.message;
+      contentDiv.innerHTML = "加载章节列表失败：" + err.message;
     });
 });
 
@@ -56,13 +56,13 @@ function loadChapter(id) {
     .then((data) => {
       const chapter = data.chapters.find((ch) => ch.id == id);
       if (chapter) {
-        contentDiv.textContent = chapter.content;
+        contentDiv.innerHTML = chapter.content;
       } else {
-        contentDiv.textContent = "章节未找到";
+        contentDiv.innerHTML = "章节未找到";
       }
     })
     .catch((err) => {
-      contentDiv.textContent = "加载章节内容失败：" + err.message;
+      contentDiv.innerHTML = "加载章节内容失败：" + err.message;
     });
 }
 
