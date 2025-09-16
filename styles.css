@@ -178,6 +178,16 @@ body.dark .text-info .intro {
     width: 45vw; /* 每本书占屏幕宽度约一半 */
     max-width: 180px; /* 可选最大宽度 */
   }
+  .img-row {
+    flex-direction: column; /* 改为上下排列 */
+    align-items: center; /* 居中对齐 */
+  }
+
+  .about-img {
+    height: auto; /* 不固定高度 */
+    width: 90%; /* 占屏幕 90% 宽度 */
+    max-width: 400px; /* 限制最大宽度 */
+  }
 }
 
 .book-container {
@@ -222,4 +232,15 @@ body.dark .text-info .intro {
 
 .about-btn:hover {
   color: #555; /* 悬停时稍微显眼 */
+}
+.img-row {
+  display: flex;
+  gap: 20px; /* 两图之间的间距 */
+  justify-content: center; /* 居中对齐，可选 */
+}
+
+.about-img {
+  height: 400px; /* 统一高度 */
+  width: auto; /* 宽度自适应，保持比例 */
+  object-fit: contain; /* 确保不被压缩变形 */
 }
