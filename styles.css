@@ -192,3 +192,19 @@ body.dark .text-info .intro {
 .book:hover {
   transform: scale(1.05);
 }
+
+.footer {
+  text-align: center;
+  margin-top: 40px; /* 距离上方内容 */
+}
+
+.about-btn {
+  font-size: 0.8rem;
+  color: #888; /* 灰色，不太醒目 */
+  text-decoration: none; /* 去掉下划线 */
+  transition: color 0.3s;
+}
+
+.about-btn:hover {
+  color: #555; /* 悬停时稍微显眼 */
+}
