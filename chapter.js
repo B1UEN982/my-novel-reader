@@ -1,18 +1,26 @@
 const fs = require("fs");
 const path = require("path");
 
-const chaptersDir = path.join(__dirname, "chapters");
-const outputFile = path.join(__dirname, "novel.json");
+const booksDir = path.join(__dirname, "books");
 
 function getChapterTitle(filename) {
-  // 这里简单取文件名作为章节标题，去掉扩展名
+  // 去掉扩展名作为章节标题
   return path.basename(filename, ".txt");
 }
 
-async function buildJson() {
+async function buildJsonForBook(bookPath) {
   try {
+    const chaptersDir = path.join(bookPath, "chapters");
+    const outputFile = path.join(bookPath, "novel.json");
+
+    // 检查是否有 chapters 目录
+    const exists = await fs.promises.stat(chaptersDir).catch(() => null);
+    if (!exists) {
+      console.warn(`跳过：${bookPath}（没有 chapters 文件夹）`);
+      return;
+    }
+
     const files = await fs.promises.readdir(chaptersDir);
-    // 筛选txt文件，按文件名排序（确保章节顺序）
     const txtFiles = files.filter((f) => f.endsWith(".txt")).sort();
 
     const chapters = [];
@@ -25,7 +33,7 @@ async function buildJson() {
       chapters.push({
         id: i + 1,
         title: getChapterTitle(filename),
-        content: content, // ← 去掉 .trim()，保留原始格式
+        content: content, // 保留原始格式
       });
     }
 
@@ -37,10 +45,28 @@ async function buildJson() {
       "utf-8"
     );
 
-    console.log("成功生成 novel.json");
+    console.log(`成功生成: ${outputFile}`);
+  } catch (err) {
+    console.error(`处理 ${bookPath} 时发生错误:`, err);
+  }
+}
+
+async function buildAll() {
+  try {
+    const books = await fs.promises.readdir(booksDir);
+
+    for (const book of books) {
+      const bookPath = path.join(booksDir, book);
+      const stat = await fs.promises.stat(bookPath);
+      if (stat.isDirectory()) {
+        await buildJsonForBook(bookPath);
+      }
+    }
+
+    console.log("全部小说处理完成。");
   } catch (err) {
     console.error("发生错误:", err);
   }
 }
 
-buildJson();
+buildAll();

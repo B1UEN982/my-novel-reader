@@ -3,33 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>月之幻想</title>
+    <title>书架</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" href="images/Arcueid-icon.png" type="image/png" />
   </head>
-
   <body>
-    <div class="center-container">
-      <div id="header">
-        <img src="images/cover/月之幻想.png" alt="小说封面" />
-        <div class="text-info">
-          <!-- <h1>月之幻想</h1>
-          <h3 class="author">B1UEN</h3> -->
-          <p class="intro">
-            《月姬》的同人合集。“月之幻想”是指 B1UEN 对《月姬 -The other side of
-            red garden-》遥遥无期的不满，和一些幻想。
-          </p>
-        </div>
+    <div class="book-container">
+      <!-- 第一本书 -->
+      <div class="book" onclick="location.href='reader.html?book=月之幻想'">
+        <img src="images/cover/月之幻想.png" alt="月之幻想" />
       </div>
-
-      <label for="chapterSelect">选择章节：</label>
-      <select id="chapterSelect"></select>
-      <button id="toggleTheme">🌙 切换夜间模式</button>
+      <!-- 第二本书 -->
+      <div
+        class="book"
+        onclick="location.href='reader.html?book=孟晓的校园故事'"
+      >
+        <img src="images/cover/きゅうくらりん--いよわ.png" alt="第二本书" />
+      </div>
     </div>
-
-    <div id="content">请选择章节查看内容。</div>
-
-    <button id="backToTop">⬆️</button>
-    <script src="script.js"></script>
   </body>
 </html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>阅读器</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/Arcueid-icon.png" type="image/png" />
+  </head>
+  <body>
+    <div class="center-container">
+      <div id="header">
+        <img id="bookCover" src="" alt="小说封面" />
+        <div class="text-info">
+          <p class="intro" id="bookIntro">加载中...</p>
+        </div>
+      </div>
+
+      <label for="chapterSelect">选择章节：</label>
+      <select id="chapterSelect"></select>
+      <button id="toggleTheme">🌙 切换夜间模式</button>
+      <button onclick="location.href='index.html'" id="toggleTheme">
+        书架
+      </button>
+    </div>
+
+    <div id="content">请选择章节查看内容。</div>
+    <button id="backToTop">⬆️</button>
+
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 获取 URL 参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const book = urlParams.get("book");
+
+        // 写死封面和简介
+        const booksInfo = {
+          月之幻想: {
+            cover: "images/cover/月之幻想.png",
+            intro:
+              "《月姬》的同人合集。“月之幻想”是指 B1UEN 对《月姬 -The other side of red garden-》遥遥无期的不满，和一些幻想。",
+          },
+          孟晓的校园故事: {
+            cover: "images/cover/きゅうくらりん--いよわ.png",
+            intro:
+              "孟晓的校园故事的草稿，封面出自专辑【きゅうくらりん--いよわ】",
+          },
+          // 以后可以加第三本书：
+          // "书名": { cover: "图片路径", intro: "简介" }
+        };
+
+        const coverEl = document.getElementById("bookCover");
+        const introEl = document.getElementById("bookIntro");
+
+        if (booksInfo[book]) {
+          coverEl.src = booksInfo[book].cover;
+          introEl.textContent = booksInfo[book].intro;
+        } else {
+          introEl.textContent = "未找到该书。";
+        }
+      });
+    </script>
+  </body>
+</html>
