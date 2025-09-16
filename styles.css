@@ -172,7 +172,7 @@ body.dark .text-info .intro {
   justify-content: center; /* 水平居中整行封面 */
   align-items: center; /* 垂直居中对齐 */
   gap: 40px; /* 每本书之间的间距 */
-  flex-wrap: nowrap; /* 不换行，如果屏幕太窄可以改成 wrap */
+  flex-wrap: wrap; /* 允许换行 */
   min-height: 100vh; /* 让容器撑满屏幕高度 */
 }
 
