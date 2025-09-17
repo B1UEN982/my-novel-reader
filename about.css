@@ -7,14 +7,14 @@ body {
   margin: 0;
   background-image: url("images/MB_Lumina_Hisui.png");
   background-repeat: no-repeat;
-  background-position: center center; /* 居中显示 */
+  background-position: calc(50% - 60px) calc(50% + 50px); /* 向左 50px，向下 60px */
 }
 
 .center-container {
   max-width: 800px;
   margin: 2em auto;
   padding: 1em 1.5em;
-  background-color: rgba(255, 255, 255, 0.85); /* 透明度 0.85，可调0~1 */
+  background-color: rgba(255, 255, 255, 0.65); /* 透明度 0.85，可调0~1 */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
