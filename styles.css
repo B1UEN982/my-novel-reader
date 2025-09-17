@@ -16,6 +16,8 @@ body {
 
 #toggleTheme {
   margin-bottom: 1em;
+  font-size: 1rem;
+  padding: 8px 12px;
 }
 
 .text-info {
@@ -28,25 +30,14 @@ body {
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   flex: 1;
-
   min-height: 120px; /* 关键：需有高度才能垂直居中 */
 }
-
-/* .text-info h1 {
-  margin: 0 0 0.5em;
-}
-
-.text-info .author {
-  margin: 0 0 0.5em;
-  font-weight: bold;
-  color: #333;
-} */
 
 .text-info .intro {
   color: #666;
   line-height: 1.5;
-  text-align: left; /* 根据需求也可以是 center */
-  margin: 0; /* 移除默认段落边距 */
+  text-align: left;
+  margin: 0;
 }
 
 #header {
@@ -79,18 +70,18 @@ body {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: background 0.3s, color 0.3s;
-
   width: 1000px;
   max-width: 95vw;
   margin: 0 auto;
 }
 
 #content img {
-  max-width: 100%; /* 图片不会超过容器宽度 */
-  height: auto; /* 保持宽高比例 */
+  max-width: 100%;
+  height: auto;
   display: block;
-  margin: 1em 0; /* 上下留白 */
+  margin: 1em 0;
 }
+
 select {
   font-size: 1em;
   margin-bottom: 1em;
@@ -100,13 +91,11 @@ select {
 body.dark {
   background: #1e1e1e;
   color: #eee;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 body.dark #content {
   background: #2e2e2e;
   color: #eee;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 body.dark .text-info {
@@ -115,16 +104,16 @@ body.dark .text-info {
   border-color: #444;
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.05);
 }
+
 body.dark .text-info .intro {
   color: #ccc;
 }
+
+/* 回到顶部按钮 */
 #backToTop {
   position: fixed;
-  /* left: 20px; */
   right: 20px;
-  bottom: 20px; /* 改成距离底部 */
-  top: auto; /* 取消顶部定位 */
-  transform: none; /* 取消平移 */
+  bottom: 20px;
   padding: 10px 15px;
   font-size: 18px;
   border: none;
@@ -142,61 +131,14 @@ body.dark .text-info .intro {
   opacity: 1;
 }
 
-/* 手机响应式 */
-@media (max-width: 600px) {
-  body {
-    padding: 1em;
-  }
-  .center-container {
-    width: 100%;
-    max-width: 100%;
-  }
-  #content {
-    width: 100%;
-    max-width: 100%;
-    padding: 1em;
-    font-size: 1.1rem;
-  }
-  select {
-    width: 100%;
-    font-size: 1rem;
-  }
-  #toggleTheme {
-    font-size: 1rem;
-    padding: 8px 12px;
-  }
-
-  /* 手机端封面间距和大小调整 */
-  .book-container {
-    gap: 10px; /* 缩小水平间距 */
-    row-gap: 5px; /* 缩小垂直间距 */
-    justify-content: center;
-    min-height: auto; /* 取消撑满屏幕高度 */
-  }
-
-  .book img {
-    width: 45vw; /* 每本书占屏幕宽度约一半 */
-    max-width: 180px; /* 可选最大宽度 */
-  }
-  .img-row {
-    flex-direction: column; /* 改为上下排列 */
-    align-items: center; /* 居中对齐 */
-  }
-
-  .about-img {
-    height: auto; /* 不固定高度 */
-    width: 90%; /* 占屏幕 90% 宽度 */
-    max-width: 400px; /* 限制最大宽度 */
-  }
-}
-
+/* 书架封面 */
 .book-container {
-  display: flex; /* 启用 flex 布局 */
-  justify-content: center; /* 水平居中整行封面 */
-  align-items: center; /* 垂直居中对齐 */
-  gap: 40px; /* 每本书之间的间距 */
-  flex-wrap: wrap; /* 允许换行 */
-  min-height: 100vh; /* 让容器撑满屏幕高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  min-height: 100vh;
 }
 
 .book {
@@ -206,7 +148,7 @@ body.dark .text-info .intro {
 }
 
 .book img {
-  width: 200px; /* 根据需求调整大小 */
+  width: 200px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -216,6 +158,7 @@ body.dark .text-info .intro {
   transform: scale(1.05);
 }
 
+/* About按钮 */
 .footer {
   position: fixed;
   bottom: 10px;
@@ -225,22 +168,129 @@ body.dark .text-info .intro {
 
 .about-btn {
   font-size: 0.8rem;
-  color: #888; /* 灰色，不太醒目 */
-  text-decoration: none; /* 去掉下划线 */
+  color: #888;
+  text-decoration: none;
   transition: color 0.3s;
 }
 
 .about-btn:hover {
-  color: #555; /* 悬停时稍微显眼 */
+  color: #555;
 }
+
+/* About页面图片行 */
 .img-row {
   display: flex;
-  gap: 20px; /* 两图之间的间距 */
-  justify-content: center; /* 居中对齐，可选 */
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch; /* PC端高度对齐 */
 }
 
 .about-img {
-  height: 400px; /* 统一高度 */
-  width: auto; /* 宽度自适应，保持比例 */
-  object-fit: contain; /* 确保不被压缩变形 */
+  height: 400px; /* PC端统一高度 */
+  width: auto; /* 宽度自适应 */
+  object-fit: cover; /* 保持比例填充高度 */
+}
+
+/* 手机响应式 */
+@media (max-width: 900px) {
+  body {
+    padding: 1em;
+  }
+  .center-container,
+  #content {
+    width: 100%;
+    max-width: 100%;
+    padding: 1em;
+  }
+  select {
+    width: 100%;
+    font-size: 1rem;
+  }
+  .book-container {
+    gap: 10px;
+    row-gap: 5px;
+    justify-content: center;
+    min-height: auto;
+  }
+  .book img {
+    width: 45vw;
+    max-width: 180px;
+  }
+
+  /* About页面图片调整 */
+  .img-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .about-img {
+    height: auto;
+    width: 90%;
+    max-width: 400px;
+  }
+}
+/* 内容框 */
+#content {
+  background: #fff;
+  padding: 1.5em;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 1000px;
+  max-width: 95vw;
+  margin: 0 auto;
+  transition: background 0.3s, color 0.3s;
+  box-sizing: border-box;
+}
+
+/* 图片行 */
+.img-row {
+  display: flex;
+  gap: 20px; /* 图片间距 */
+  justify-content: center;
+  margin: 1em 0;
+  flex-wrap: wrap; /* 移动端换行 */
+}
+
+.about-img {
+  height: 400px; /* PC端统一高度 */
+  width: auto; /* 宽度自适应保持比例 */
+  object-fit: contain;
+}
+
+/* B站链接样式 */
+.bili-link {
+  color: palevioletred;
+  text-decoration: none;
+}
+
+.bili-link:hover {
+  color: #c71585;
+}
+
+/* 返回书架按钮 */
+.about-btn {
+  display: inline-block;
+  margin-top: 1em;
+  font-size: 0.8rem;
+  color: #888;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.about-btn:hover {
+  color: #555;
+}
+
+/* 手机端响应式 */
+@media (max-width: 600px) {
+  .img-row {
+    flex-direction: column; /* 上下排列 */
+    align-items: center;
+    gap: 15px;
+  }
+
+  .about-img {
+    height: auto; /* 自适应高度 */
+    width: 90%; /* 占屏幕宽度90% */
+    max-width: 400px;
+  }
 }
