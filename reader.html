@@ -19,10 +19,9 @@
       <label for="chapterSelect">选择章节：</label>
       <select id="chapterSelect"></select>
       <button id="toggleTheme">🌙 切换夜间模式</button>
-      <button onclick="location.href='index.html'" id="bookShelfBtn">
+      <button id="bookShelfBtn" onclick="location.href='index.html'">
         书架
       </button>
-      <!-- 字体大小按钮 -->
       <button id="fontIncrease">A+</button>
       <button id="fontDecrease">A-</button>
     </div>
@@ -32,25 +31,22 @@
 
     <script src="script.js"></script>
     <script>
+      // 设置封面和简介
       document.addEventListener("DOMContentLoaded", () => {
-        // 获取 URL 参数
         const urlParams = new URLSearchParams(window.location.search);
         const book = urlParams.get("book");
 
-        // 写死封面和简介
         const booksInfo = {
           月之幻想: {
             cover: "images/cover/月之幻想.png",
             intro:
-              "《月姬》的同人合集。“月之幻想”是指 B1UEN 对《月姬 -The other side of red garden-》遥遥无期的不满，和一些幻想。",
+              "《月姬》的同人合集。“月之幻想”是指 B1UEN 对《月姬 -The other side of red garden-》的幻想。",
           },
           孟晓的校园故事: {
             cover: "images/cover/きゅうくらりん--いよわ.png",
             intro:
               "孟晓的校园故事的草稿，封面出自专辑【きゅうくらりん--いよわ】",
           },
-          // 以后可以加第三本书：
-          // "书名": { cover: "图片路径", intro: "简介" }
         };
 
         const coverEl = document.getElementById("bookCover");
