@@ -97,3 +97,30 @@ window.addEventListener("scroll", () => {
 backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+// ========== 字体大小调整 ==========
+let fontSize = parseInt(window.getComputedStyle(contentDiv).fontSize, 10); // 初始字号
+const fontIncreaseBtn = document.getElementById("fontIncrease");
+const fontDecreaseBtn = document.getElementById("fontDecrease");
+
+fontIncreaseBtn.addEventListener("click", () => {
+  fontSize += 2;
+  contentDiv.style.fontSize = fontSize + "px";
+  localStorage.setItem("fontSize", fontSize); // 记住设置
+});
+
+fontDecreaseBtn.addEventListener("click", () => {
+  if (fontSize > 10) {
+    fontSize -= 2;
+    contentDiv.style.fontSize = fontSize + "px";
+    localStorage.setItem("fontSize", fontSize);
+  }
+});
+
+// 页面加载时恢复用户选择的字号
+document.addEventListener("DOMContentLoaded", () => {
+  const savedFontSize = localStorage.getItem("fontSize");
+  if (savedFontSize) {
+    fontSize = parseInt(savedFontSize, 10);
+    contentDiv.style.fontSize = fontSize + "px";
+  }
+});
