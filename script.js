@@ -2,6 +2,9 @@ const contentDiv = document.getElementById("content");
 const select = document.getElementById("chapterSelect");
 const themeBtn = document.getElementById("toggleTheme");
 const backToTopBtn = document.getElementById("backToTop");
+const bookShelfBtn = document.getElementById("bookShelfBtn");
+const fontIncrease = document.getElementById("fontIncrease");
+const fontDecrease = document.getElementById("fontDecrease");
 
 // 获取 URL 参数里的 book
 const urlParams = new URLSearchParams(window.location.search);
