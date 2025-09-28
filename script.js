@@ -2,30 +2,66 @@ const contentDiv = document.getElementById("content");
 const select = document.getElementById("chapterSelect");
 const themeBtn = document.getElementById("toggleTheme");
 const backToTopBtn = document.getElementById("backToTop");
-const bookShelfBtn = document.getElementById("bookShelfBtn");
-const fontIncrease = document.getElementById("fontIncrease");
-const fontDecrease = document.getElementById("fontDecrease");
+const fontIncreaseBtn = document.getElementById("fontIncrease");
+const fontDecreaseBtn = document.getElementById("fontDecrease");
 
-// 获取 URL 参数里的 book
 const urlParams = new URLSearchParams(window.location.search);
 const book = urlParams.get("book");
 
-// 根据当前 URL 动态判断基础路径，兼容 GitHub Pages 子目录
 const basePath = window.location.pathname.startsWith("/my-novel-reader")
   ? "/my-novel-reader"
   : "";
 
-// 封装 fetch novel.json，根据 book 参数加载对应书籍的章节
+let chapterData = null;
+let fontSize = parseInt(window.getComputedStyle(contentDiv).fontSize, 10);
+
 function fetchNovelJson() {
+  if (chapterData) return Promise.resolve(chapterData);
   if (!book) return Promise.reject(new Error("未指定书名 book 参数"));
-  return fetch(`${basePath}/books/${book}/novel.json`).then((res) => {
-    if (!res.ok) throw new Error("无法加载 novel.json");
-    return res.json();
-  });
+  return fetch(`${basePath}/books/${book}/novel.json`)
+    .then((res) => {
+      if (!res.ok) throw new Error("无法加载 novel.json");
+      return res.json();
+    })
+    .then((data) => {
+      chapterData = data;
+      return data;
+    });
 }
 
-// 页面加载
+function loadChapter(id) {
+  if (!chapterData) return fetchNovelJson().then(() => loadChapter(id));
+  const chapter = chapterData.chapters.find((ch) => ch.id == id);
+  contentDiv.innerHTML = chapter ? chapter.content : "章节未找到";
+}
+
+// 初始化页面
 document.addEventListener("DOMContentLoaded", () => {
+  // 初始化封面与简介
+  const booksInfo = {
+    月之幻想: {
+      cover: "images/cover/月之幻想.png",
+      intro:
+        "《月姬》的同人合集，“月之幻想”指的是B1UEN对《月姬 -The other side of red garden-》遥遥无期的不满，和一些幻想。",
+    },
+    孟晓的校园故事: {
+      cover: "images/cover/きゅうくらりん--いよわ.png",
+      intro: "孟晓的校园故事，封面出自《きゅうくらりん--いよわ》。",
+    },
+    随笔: {
+      cover: "images/misakimei3.jpg",
+      intro: "B1UEN的随笔，不限篇幅和形式，封面是《Another》小说的插画。",
+    },
+  };
+  const coverEl = document.getElementById("bookCover");
+  const introEl = document.getElementById("bookIntro");
+  if (booksInfo[book]) {
+    coverEl.src = booksInfo[book].cover;
+    introEl.textContent = booksInfo[book].intro;
+  } else {
+    introEl.textContent = "未找到该书。";
+  }
+
   // 初始化主题
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
@@ -36,22 +72,27 @@ document.addEventListener("DOMContentLoaded", () => {
     themeBtn.textContent = "🌙 切换到夜间模式";
   }
 
+  // 初始化字体
+  const savedFontSize = localStorage.getItem("fontSize");
+  if (savedFontSize) {
+    fontSize = parseInt(savedFontSize, 10);
+    contentDiv.style.fontSize = fontSize + "px";
+  }
+
   // 加载章节列表
   fetchNovelJson()
     .then((data) => {
-      const chapters = data.chapters;
-      chapters.forEach((chapter) => {
+      data.chapters.forEach((ch) => {
         const option = document.createElement("option");
-        option.value = chapter.id;
-        option.textContent = chapter.title;
+        option.value = ch.id;
+        option.textContent = ch.title;
         select.appendChild(option);
       });
-
-      if (chapters.length > 0) {
+      if (data.chapters.length > 0) {
         const lastId = localStorage.getItem(`lastChapter_${book}`);
-        const defaultId = chapters.some((ch) => ch.id == lastId)
+        const defaultId = data.chapters.some((ch) => ch.id == lastId)
           ? lastId
-          : chapters[0].id;
+          : data.chapters[0].id;
         loadChapter(defaultId);
         select.value = defaultId;
       }
@@ -61,26 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// 根据章节 id 加载内容
-function loadChapter(id) {
-  fetchNovelJson()
-    .then((data) => {
-      const chapter = data.chapters.find((ch) => ch.id == id);
-      contentDiv.innerHTML = chapter ? chapter.content : "章节未找到";
-    })
-    .catch((err) => {
-      contentDiv.innerHTML = "加载章节内容失败：" + err.message;
-    });
-}
-
-// 章节切换事件
+// 章节切换
 select.addEventListener("change", () => {
   const selectedId = select.value;
   loadChapter(selectedId);
   localStorage.setItem(`lastChapter_${book}`, selectedId);
 });
 
-// 🌙 日夜模式切换
+// 日夜模式切换
 themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   if (document.body.classList.contains("dark")) {
@@ -96,34 +125,20 @@ themeBtn.addEventListener("click", () => {
 window.addEventListener("scroll", () => {
   backToTopBtn.style.display = window.scrollY > 100 ? "block" : "none";
 });
-
 backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
-// ========== 字体大小调整 ==========
-let fontSize = parseInt(window.getComputedStyle(contentDiv).fontSize, 10); // 初始字号
-const fontIncreaseBtn = document.getElementById("fontIncrease");
-const fontDecreaseBtn = document.getElementById("fontDecrease");
 
+// 字号调整
 fontIncreaseBtn.addEventListener("click", () => {
   fontSize += 2;
   contentDiv.style.fontSize = fontSize + "px";
-  localStorage.setItem("fontSize", fontSize); // 记住设置
+  localStorage.setItem("fontSize", fontSize);
 });
-
 fontDecreaseBtn.addEventListener("click", () => {
   if (fontSize > 10) {
     fontSize -= 2;
     contentDiv.style.fontSize = fontSize + "px";
     localStorage.setItem("fontSize", fontSize);
-  }
-});
-
-// 页面加载时恢复用户选择的字号
-document.addEventListener("DOMContentLoaded", () => {
-  const savedFontSize = localStorage.getItem("fontSize");
-  if (savedFontSize) {
-    fontSize = parseInt(savedFontSize, 10);
-    contentDiv.style.fontSize = fontSize + "px";
   }
 });

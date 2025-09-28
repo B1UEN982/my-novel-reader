@@ -1,45 +1,31 @@
-/* 通用样式 */
+/* ===== 通用样式 ===== */
 body {
   font-family: "微软雅黑", sans-serif;
   padding: 2em;
   background: #f0f0f0;
   color: #000;
   transition: background 0.3s, color 0.3s;
+  margin: 0;
 }
 
 .center-container {
   width: 1000px;
-  max-width: 95vw; /* 最大宽度不超过屏幕95% */
+  max-width: 95vw;
   margin: 0 auto;
   text-align: left;
 }
 
-#toggleTheme {
+#toggleTheme,
+#bookShelfBtn,
+#fontIncrease,
+#fontDecrease {
   margin-bottom: 1em;
   font-size: 1rem;
   padding: 8px 12px;
+  cursor: pointer;
 }
 
-.text-info {
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
-  border: 1px solid #ccc;
-  padding: 1em;
-  background-color: #fff;
-  border-radius: 6px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  min-height: 120px; /* 关键：需有高度才能垂直居中 */
-}
-
-.text-info .intro {
-  color: #666;
-  line-height: 1.5;
-  text-align: left;
-  margin: 0;
-}
-
+/* ===== 小说头部 & 封面 ===== */
 #header {
   display: flex;
   align-items: center;
@@ -53,16 +39,27 @@ body {
   border-radius: 6px;
 }
 
-.author {
-  margin-left: 1.5em;
-  font-weight: bold;
+.text-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-height: 120px;
 }
 
-.intro {
-  margin-left: 1.8em;
+.text-info .intro {
   color: #666;
+  line-height: 1.5;
+  text-align: left;
+  margin: 0;
 }
 
+/* ===== 小说内容区 ===== */
 #content {
   white-space: pre-wrap;
   background: #fff;
@@ -73,6 +70,7 @@ body {
   width: 1000px;
   max-width: 95vw;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 #content img {
@@ -87,7 +85,7 @@ select {
   margin-bottom: 1em;
 }
 
-/* 夜间模式 */
+/* ===== 夜间模式 ===== */
 body.dark {
   background: #1e1e1e;
   color: #eee;
@@ -109,7 +107,7 @@ body.dark .text-info .intro {
   color: #ccc;
 }
 
-/* 回到顶部按钮 */
+/* ===== 返回顶部按钮 ===== */
 #backToTop {
   position: fixed;
   right: 20px;
@@ -131,7 +129,7 @@ body.dark .text-info .intro {
   opacity: 1;
 }
 
-/* 书架封面 */
+/* ===== 书架封面 ===== */
 .book-container {
   display: flex;
   justify-content: center;
@@ -158,7 +156,8 @@ body.dark .text-info .intro {
   transform: scale(1.05);
 }
 
-/* About按钮 */
+/* ===== About按钮 ===== */
+/* PC端：底部中央 */
 .footer {
   position: fixed;
   bottom: 10px;
@@ -166,6 +165,7 @@ body.dark .text-info .intro {
   text-align: center;
 }
 
+/* 按钮通用样式 */
 .about-btn {
   font-size: 0.8rem;
   color: #888;
@@ -177,21 +177,32 @@ body.dark .text-info .intro {
   color: #555;
 }
 
-/* About页面图片行 */
+/* ===== 图片行 ===== */
 .img-row {
   display: flex;
   gap: 20px;
   justify-content: center;
-  align-items: stretch; /* PC端高度对齐 */
+  margin: 1em 0;
+  flex-wrap: wrap;
 }
 
 .about-img {
-  height: 400px; /* PC端统一高度 */
-  width: auto; /* 宽度自适应 */
-  object-fit: cover; /* 保持比例填充高度 */
+  height: 400px;
+  width: auto;
+  object-fit: contain;
 }
 
-/* 手机响应式 */
+/* ===== B站链接 ===== */
+.bili-link {
+  color: palevioletred;
+  text-decoration: none;
+}
+
+.bili-link:hover {
+  color: #c71585;
+}
+
+/* ===== 手机端响应式 ===== */
 @media (max-width: 900px) {
   body {
     padding: 1em;
@@ -206,18 +217,20 @@ body.dark .text-info .intro {
     width: 100%;
     font-size: 1rem;
   }
-  .book-container {
-    gap: 10px;
-    row-gap: 5px;
-    justify-content: center;
-    min-height: auto;
-  }
   .book img {
     width: 45vw;
     max-width: 180px;
   }
 
-  /* About页面图片调整 */
+  /* About按钮：右下角浮动 */
+  .footer {
+    bottom: 20px;
+    right: 20px;
+    left: auto;
+    width: auto;
+    text-align: right;
+  }
+
   .img-row {
     flex-direction: column;
     align-items: center;
@@ -228,83 +241,17 @@ body.dark .text-info .intro {
     max-width: 400px;
   }
 }
-/* 内容框 */
-#content {
-  background: #fff;
-  padding: 1.5em;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 1000px;
-  max-width: 95vw;
-  margin: 0 auto;
-  transition: background 0.3s, color 0.3s;
-  box-sizing: border-box;
-}
 
-/* 图片行 */
-.img-row {
-  display: flex;
-  gap: 20px; /* 图片间距 */
-  justify-content: center;
-  margin: 1em 0;
-  flex-wrap: wrap; /* 移动端换行 */
-}
-
-.about-img {
-  height: 400px; /* PC端统一高度 */
-  width: auto; /* 宽度自适应保持比例 */
-  object-fit: contain;
-}
-
-/* B站链接样式 */
-.bili-link {
-  color: palevioletred;
-  text-decoration: none;
-}
-
-.bili-link:hover {
-  color: #c71585;
-}
-
-/* 返回书架按钮 */
-.about-btn {
-  display: inline-block;
-  margin-top: 1em;
-  font-size: 0.8rem;
-  color: #888;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.about-btn:hover {
-  color: #555;
-}
-
-/* 手机端响应式 */
+/* 更小屏幕适配 */
 @media (max-width: 600px) {
   .img-row {
-    flex-direction: column; /* 上下排列 */
+    flex-direction: column;
     align-items: center;
     gap: 15px;
   }
-
   .about-img {
-    height: auto; /* 自适应高度 */
-    width: 90%; /* 占屏幕宽度90% */
+    width: 90%;
     max-width: 400px;
+    height: auto;
   }
-}
-#fontIncrease,
-#fontDecrease {
-  margin-bottom: 1em;
-  font-size: 1rem;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-
-#bookShelfBtn {
-  margin-bottom: 1em;
-  font-size: 1rem;
-  padding: 8px 12px;
-  cursor: pointer;
 }
