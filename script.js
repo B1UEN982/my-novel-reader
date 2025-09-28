@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     孟晓的校园故事: {
       cover: "images/cover/きゅうくらりん--いよわ.png",
-      intro: "孟晓的校园故事，封面出自《きゅうくらりん--いよわ》。",
+      intro: "孟晓的校园故事，封面出自【きゅうくらりん--いよわ】",
     },
     随笔: {
       cover: "images/misakimei3.jpg",
