@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     随笔: {
       cover: "images/misakimei3.jpg",
-      intro: "B1UEN的随笔，不限篇幅和形式，封面是《Another》小说的插画。",
+      intro: "B1UEN的随笔，不限内容和形式，封面是《Another》小说的插画。",
     },
   };
   const coverEl = document.getElementById("bookCover");
