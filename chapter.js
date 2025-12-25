@@ -4,7 +4,7 @@ const path = require("path");
 const booksDir = path.join(__dirname, "books");
 
 function getChapterTitle(filename) {
-  // 去掉扩展名作为章节标题
+  // 去掉扩展名作为章节标题 key test
   return path.basename(filename, ".txt");
 }
 
